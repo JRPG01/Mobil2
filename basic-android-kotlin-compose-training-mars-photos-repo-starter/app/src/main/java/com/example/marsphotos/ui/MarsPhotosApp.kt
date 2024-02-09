@@ -50,6 +50,7 @@ fun MarsPhotosApp() {
                 viewModel(factory = MarsViewModel.Factory)
             HomeScreen(
                 marsUiState = marsViewModel.marsUiState,
+                retryAction = marsViewModel::getMarsPhotos,
                 contentPadding = it
             )
         }

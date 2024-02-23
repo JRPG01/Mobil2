@@ -85,4 +85,11 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.8.1")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
+
+    // Espresso
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Junit
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    // Work testing
+    androidTestImplementation("androidx.work:work-testing:2.8.1")
 }

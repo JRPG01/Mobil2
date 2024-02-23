@@ -39,6 +39,12 @@ class WorkerInstrumentationTest {
         runBlocking {
             val result = worker.doWork()
             val resultUri = result.outputData.getString(KEY_IMAGE_URI)
+            assertTrue(result is ListenableWorker.Result.Success)
+            assertTrue(result.outputData.keyValueMap.containsKey(KEY_IMAGE_URI))
+            assertTrue(
+                resultUri?.startsWith("file:///data/user/0/com.example.bluromatic/files/blur_filter_outputs/blur-filter-output-")
+                    ?: false
+            )
         }
     }
 }

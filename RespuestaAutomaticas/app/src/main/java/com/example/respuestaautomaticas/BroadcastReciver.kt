@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import com.example.respuestaautomaticas.ViewModel.ViewModelMensaje
+import com.example.respuestaautomaticas.ui.Telefono
 
 class BroadcastReciver: BroadcastReceiver() {
     private var mListener: ServiceStateListener? = null
@@ -29,7 +30,6 @@ class BroadcastReciver: BroadcastReceiver() {
             mTelephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             // Extrae el numero que esta llamado
             val ExtraerNumero = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)
-            Log.d("Numero Entrante",ExtraerNumero+"")
             // Envia el mensaje
             if (ExtraerNumero != null) {
                 EnviarMensaje(ExtraerNumero)
@@ -45,9 +45,11 @@ class BroadcastReciver: BroadcastReceiver() {
     private fun EnviarMensaje(numero: String) {
         val smsMensaje = SmsManager.getDefault()
         // Cambiar este mensaje por el que esta escrito en el viewmodel de la caja de texto
-        val mensaje = "Este es un mensaje de prueba para comprovar si funciona"
-        smsMensaje.sendTextMessage(numero,null,mensaje,null,null)
-        Log.d("Mensaje Enviado",smsMensaje.toString())
+        val mensaje = Telefono.Tel.sms
+        Log.d("Mensaje",mensaje+" "+numero)
+        if (numero == Telefono.Tel.num){
+            smsMensaje.sendTextMessage(numero, null, mensaje, null, null)
+        }
     }
 
     // Detecta si el telefono tiene señal
